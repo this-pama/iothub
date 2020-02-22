@@ -43,7 +43,7 @@ app.use(function(req, res, next) {
 
 
 //A welcome message for debugging 
-app.get('/',(req,res)=> res.send("Welcome to the IOT Hub space"))
+app.get('/',(req,res)=> res.send("Welcome to the IOT Hub api home space"))
 
 // api routes v1
 app.use('/v1', routes);
