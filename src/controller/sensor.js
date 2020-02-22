@@ -53,8 +53,31 @@ export default({ config, db }) => {
     });
   });
 
+// '/v1/sensor/add/:id' - POST add a sensor  { id is user ID}
+api.post('/add/:userId',authenticate, (req, res) => {
+  let data = {
+    eui: req.body.eui,
+    userId: req.params.userId,
+    sensorType: req.body.sensorType,
+    longitude: req.body.longitude,
+    latitude: req.body.latitude,
+    name: req.body.name,
+    description: req.body.description
+  }
 
-  // '/v1/sensor/update/:id' - PUT - update a a sensor  { id is user ID}
+  if(!req.body.userId || !req.body.eui || !!req.body.name || !req.body.description) return res.status(200).json({ success: false, message: "specify user id, name, eui, and description"}); 
+
+  let newSensor = new Sensor(data)
+  newSensor.save((err, sensor)=> {
+    if (err) return res.status(400).json({ success: false, message: err});
+
+    return res.status(200).json({ success: true, message: sensor });
+  })
+
+});
+
+
+  // '/v1/sensor/update/:id' - PUT - update a a sensor  
   api.put('/update/:eui',authenticate, (req, res) => {
     let update = {
       sensorType: req.body.sensorType,
