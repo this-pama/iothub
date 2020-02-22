@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import { Router } from 'express';
 import User from '../model/user';
+import Secret from '../model/secretKey'
 import Account from '../model/account';
 import ExpoToken from "../model/expoPushToken"
 import Expo from 'expo-server-sdk';
@@ -57,6 +58,18 @@ export default({ config, db }) => {
       return res.status(200).json({ success: true, message: user });
     });
   });
+
+
+  //get user secrets
+  api.get("/secret/:userId", (req, res)=>{
+    Secret.findOne({ userId : req.params.userId}, (err, secret)=>{
+      if (err){
+        return res.status(400).json({ success: false, message: err});
+      }
+      return res.status(200).json({ success: true, message: secret });
+    })
+
+  })
 
 
 
