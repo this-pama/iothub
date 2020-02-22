@@ -20,15 +20,16 @@ export default ({ config, db }) => {
 
   // '/v1/account/register'
   api.post('/register', (req, res) => {
-    if(!req.body.firstName || !req.body.lastName || !req.body.telephone ||
+    if(!req.body.firstName || !req.body.lastName || 
       !req.body.email || !req.body.password){
         return res.status(200).json({
           success: false,
           message: "Please specify email, password, firstName, lastName, telephone"
         })
     }
+    // console.log(req.body)
 
-    Account.register(new Account({ username: req.body.email.toLowerCase()}), req.body.password, function(err, account) {
+    Account.register(new Account({ username: req.body.email.toLowerCase()}), req.body.password.toString() , function(err, account) {
       // console.log(err)
       if (err) {
         return res.status(500).json(err);
@@ -49,7 +50,7 @@ export default ({ config, db }) => {
         newUser.account_id = account._id;
 
         // Save user profile and reference it in Account db
-        newUser.save(function(err, user) {
+        newUser.save(function(err, user) {  
           if (err) {
            return  res.status(400).json(err);
           }
@@ -85,7 +86,8 @@ export default ({ config, db }) => {
 
                   return res.status(200).json({ 
                     message: 'Successfully created new account',
-                    userId: user._id
+                    userId: user._id,
+                    success: true
                   });
 
 
