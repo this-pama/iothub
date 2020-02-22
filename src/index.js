@@ -13,7 +13,7 @@ var cors = require('cors')
 app.server = http.createServer(app);
 
 // middleware
-
+app.use(cors())
 app.use(bodyParser.json({
   limit : config.bodyLimit
 }));
@@ -31,15 +31,15 @@ passport.serializeUser(Account.serializeUser());
 passport.deserializeUser(Account.deserializeUser());
 
 
-app.use(cors())
 
-//allow cross origin request
-app.use(function(req, res, next) {
-	res.header("Access-Control-Allow-Origin", "*");
-	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-	res.header('Access-Control-Allow-Methods', 'GET,PUT,PATCH,POST,DELETE');
-	next();
-});
+
+// //allow cross origin request
+// app.use(function(req, res, next) {
+// 	res.header("Access-Control-Allow-Origin", "*");
+// 	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+// 	res.header('Access-Control-Allow-Methods', 'GET,PUT,PATCH,POST,DELETE');
+// 	next();
+// });
 
 
 //A welcome message for debugging 
