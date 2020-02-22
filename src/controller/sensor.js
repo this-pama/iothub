@@ -65,7 +65,7 @@ api.post('/add/:userId',authenticate, (req, res) => {
     description: req.body.description
   }
 
-  if(!req.body.userId || !req.body.eui || !!req.body.name || !req.body.description) return res.status(200).json({ success: false, message: "specify user id, name, eui, and description"}); 
+  if( !req.body.eui || !!req.body.name || !req.body.description) return res.status(200).json({ success: false, message: "specify  name, eui, and description"}); 
 
   let newSensor = new Sensor(data)
   newSensor.save((err, sensor)=> {
