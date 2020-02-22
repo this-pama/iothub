@@ -20,6 +20,14 @@ export default ({ config, db }) => {
 
   // '/v1/account/register'
   api.post('/register', (req, res) => {
+    if(!req.body.firstName || !req.body.lastName || !req.body.telephone ||
+      !req.body.email || !req.body.password){
+        return res.status(200).json({
+          success: false,
+          message: "Please specify email, password, firstName, lastName, telephone"
+        })
+    }
+
     Account.register(new Account({ username: req.body.email.toLowerCase()}), req.body.password, function(err, account) {
       // console.log(err)
       if (err) {
