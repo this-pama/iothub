@@ -129,7 +129,7 @@ api.post('/add/:userId',authenticate, (req, res) => {
         return res.status(500).json({ success: false, message: "No record of keys found"});
       } 
 
-      Sensor.findOne({
+      Sensor.find({
         userId: key.userId,
         eui : req.body.hardware_serial
       }, (err, sensor)=>{
@@ -141,7 +141,7 @@ api.post('/add/:userId',authenticate, (req, res) => {
           return res.status(500).json({ success: false, message: err});
         }
 
-        if(!sensor){ 
+        if(!sensor || sensor.length <= 0){ 
           console.log("No sensor found") 
            return res.status(500).json({ success: false, message: "No sensor found"});
         }
