@@ -120,6 +120,9 @@ api.post('/add/:userId',authenticate, (req, res) => {
         return res.status(500).json({ success: false, message: err});
       }
 
+      console.log("key")
+      console.log(key)
+
       if(!key) {
         console.log( "No record of keys found") 
         return res.status(500).json({ success: false, message: "No record of keys found"});
@@ -129,6 +132,10 @@ api.post('/add/:userId',authenticate, (req, res) => {
         userId: key.userId,
         eui : req.body.hardware_serial
       }, (err, sensor)=>{
+
+        console.log("sensor")
+        console.log(sensor)
+
         if (err){ console.log(err) 
           return res.status(500).json({ success: false, message: err});
         }
