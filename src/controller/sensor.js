@@ -122,6 +122,7 @@ api.post('/add/:userId',authenticate, (req, res) => {
 
       console.log("req.body.hardware_serial")
       console.log(req.body.hardware_serial)
+      console.log(key.userId)
 
       if(!key) {
         console.log( "No record of keys found") 
