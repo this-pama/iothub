@@ -101,7 +101,8 @@ api.post('/add/:userId',authenticate, (req, res) => {
 
   // '/v1/sensor/application/webhook' - POST - update a a sensor  { id is user ID}
   api.post('/application/webhook', (req, res) => {
-    console.log(req.body)
+    // console.log(req.body)
+    console.log(req.headers)
     var publicKey = req.headers["Authorization"];
     var privateKey = req.headers["privateKey"];
 
