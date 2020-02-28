@@ -120,8 +120,8 @@ api.post('/add/:userId',authenticate, (req, res) => {
         return res.status(500).json({ success: false, message: err});
       }
 
-      console.log("key")
-      console.log(key)
+      console.log("req.body.hardware_serial")
+      console.log(req.body.hardware_serial)
 
       if(!key) {
         console.log( "No record of keys found") 
