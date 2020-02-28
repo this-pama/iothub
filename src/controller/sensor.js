@@ -130,9 +130,6 @@ api.post('/add/:userId',authenticate, (req, res) => {
         eui : req.body.hardware_serial
       }, (err, sensor)=>{
 
-        console.log("sensor")
-        console.log(sensor)
-
         if (err){ console.log(err) 
           return res.status(500).json({ success: false, message: err});
         }
