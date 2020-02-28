@@ -101,7 +101,7 @@ api.post('/add/:userId',authenticate, (req, res) => {
 
   // '/v1/sensor/application/webhook' - POST - update a a sensor  { id is user ID}
   api.post('application/webhook', (req, res) => {
-
+    console.log(req.body)
     var publicKey = req.headers["Authorization"];
     var privateKey = req.headers["privateKey"];
 
@@ -130,6 +130,12 @@ api.post('/add/:userId',authenticate, (req, res) => {
         if (err) return res.status(500).json({ success: false, message: err});
 
         if(!sensor) return res.status(500).json({ success: false, message: "No sensor found"});
+        
+        // //check if payload has temp and humidity value
+        // if(!req.body.payload_fields.temperature || !req.body.payload_fields.humidity) {
+
+        //   return res.status(200).json({ success: false, message: "No temp or humidity value"});
+        // }
 
         sensor.data.push(req.body)
         sensor.save((err, data)=>{
