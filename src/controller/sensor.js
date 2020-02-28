@@ -101,8 +101,8 @@ api.post('/add/:userId',authenticate, (req, res) => {
 
   // '/v1/sensor/application/webhook' - POST - update a a sensor  { id is user ID}
   api.post('/application/webhook', (req, res) => {
-    console.log(req.headers["authorization"])
-    console.log(req.headers["privatekey"])
+    // console.log(req.headers["authorization"])
+    // console.log(req.headers["privatekey"])
     // console.log(req.headers)
     var publicKey = req.headers["authorization"];
     var privateKey = req.headers["privatekey"];
@@ -129,10 +129,14 @@ api.post('/add/:userId',authenticate, (req, res) => {
         userId: key.userId,
         eui : req.body.hardware_serial
       }, (err, sensor)=>{
-        if (err) return res.status(500).json({ success: false, message: err});
+        if (err){ console.log(err) 
+          return res.status(500).json({ success: false, message: err});
+        }
 
-        if(!sensor) return res.status(500).json({ success: false, message: "No sensor found"});
-        
+        if(!sensor){ 
+          console.log("No sensor found") 
+           return res.status(500).json({ success: false, message: "No sensor found"});
+        }
         // //check if payload has temp and humidity value
         // if(!req.body.payload_fields.temperature || !req.body.payload_fields.humidity) {
 
@@ -141,7 +145,11 @@ api.post('/add/:userId',authenticate, (req, res) => {
 
         sensor.data.push(req.body)
         sensor.save((err, data)=>{
-          if (err) return res.status(200).json({ success: false, message: err});
+          if (err){ 
+            console.log(err) 
+             return res.status(200).json({ success: false, message: err});
+          }
+
 
           Setting.findOne({
             eui: req.body.hardware_serial,
