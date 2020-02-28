@@ -103,7 +103,7 @@ api.post('/add/:userId',authenticate, (req, res) => {
   api.post('/application/webhook', (req, res) => {
     console.log(req.headers["authorization"])
     console.log(req.headers["privateKey"])
-    // console.log(req.headers)
+    console.log(req.headers)
     var publicKey = req.headers["authorization"];
     var privateKey = req.headers["privateKey"];
 
