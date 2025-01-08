@@ -17,10 +17,9 @@ export default callback => {
     connectTimeoutMS: 10000,
   };
   
-  const herokuDbUrl = "mongodb://adedapopaul:Moronkeji_2016@ds115472.mlab.com:15472/iot-hub"
   const url = `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}:${MONGO_PORT}/${MONGO_DB}?authSource=admin`;
   
-  let db = mongoose.connect(herokuDbUrl, options).then( function() {
+  let db = mongoose.connect(url, options).then( function() {
               console.log('MongoDB is connected');
             })
               .catch( function(err) {
